@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>smap test</title>
+        <link rel="stylesheet" href="static/styles/style.css">
+    </head>
+    
+    <body>
+        <header>
+        </header>
+
+        <main>
+            <div id="map-main" class="map"></div>
+            <div style="padding: 5px;">
+                <div>
+                    <input type='text' id='year'>Год</input><br>
+                    <input type='text' id='year_offset'>Погрешность(лет)</input><br>
+                </div>
+                <button id="year_confirm">Применить</button>
+            </div>
+            <p>------------------------</p>
+            <p>Проверка на связь с Flask</p>
+            <p id="count">0</p>
+            <button onclick="server.increment()">Increase</button>
+            <script src="https://api-maps.yandex.ru/2.1/?apikey=none&lang=ru_RU"></script>
+            <script src="static/scripts/mapController.js"></script>
+        </main>
+        
+        <footer>
+        </footer>
+    </body>
+</html>
