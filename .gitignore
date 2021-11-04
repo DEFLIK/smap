@@ -2,3 +2,6 @@
 __pycache__
 venv
 templates_raw
+node_modules
+.vs
+package-lock.json

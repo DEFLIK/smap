@@ -1,9 +1,170 @@
+body {
+    margin: 0px;
+    background-color: white;
+}
+
 .map {
-    width: 100%;
-    height: 700px;
+    height: 100vh;
     background-color: #333;
 }
 
 [class*="copyrights-pane"] {
     display: none !important;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    position: fixed;
+    left: 100%; top: 0;
+    width: 300px;
+    height: 90vh;
+    background-color: white;
+    box-shadow: 0 0 3pt 2pt cornflowerblue;
+    border-radius: 10px;
+    transition: 0.5s;
+    transform:  translateX(5%);
+}
+
+.info-active {
+    transform: translateX(-105%);
+}
+
+.info-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    flex-direction: column;
+}
+
+.info-btn {
+    width: 30px; height: 30px;
+    position: relative;
+    left: -60%;
+    transition: 0.5s;
+    transform-origin: 50% 50%;
+}
+
+.info-btn-active {
+    transform-origin: 50% 50%;
+    transform: scale(-1, 1);
+}
+
+.menu {
+    position: fixed;
+    top: 10px; left: 10px;
+    width: 9%; height: 5%;
+}
+
+.menu-btn {
+    display: flex;
+    gap: 1vh;
+    justify-content: center;
+    align-content: center;
+    width: 100%; height: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.menu-btn p {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 2.5vh;
+    font-family: "Bahnschrift";
+    align-self: center;
+}
+
+.menu-btn-icon {
+    align-self: center;
+    size: 1.5vw;
+    transition: 0.5s;
+}
+
+.menu-btn-icon-active {
+    transform-origin: middle;
+    transform: rotateZ(-180deg);
+}
+
+.menu-settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px; height: 84vh;
+    position: relative;
+    top: 10px; left: 0px;
+    background-color: rgba(253, 254, 255, 0);
+    box-shadow: 0 0 3pt 2pt rgba(100, 148, 237, 0);
+    border-radius: 10px;
+    transition: 0.5s;
+    transform-origin: top;
+    transform: scale3d(1, 0, 1);
+}
+
+.menu-settings-active {
+    box-shadow: 0 0 3pt 2pt rgba(100, 148, 237, 1);
+    background-color: white;
+    transform: scale3d(1, 1, 1);
+}
+
+#slider-range {
+    position: fixed;
+    top: 95%; left: 1%;
+    height: 1vh; width: 98%
+}
+
+.ui-slider.ui-slider-horizontal {
+    background: #889fb9;
+    border-radius: 20px;
+    height:12px;
+    border:none;
+}
+
+.ui-slider .ui-slider-handle {
+    justify-self: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 4px solid #BFE2FF;
+    background: #FFF;
+    z-index: 2;
+}
+
+.ui-slider .ui-slider-range {
+    background: #337AB7;
+    height:12px;
+}
+
+#triangle-left {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 1vw 1.75vw 1vw 0;
+    border-color: transparent #007bff transparent transparent;
+}
+
+#triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 1.5vw 0 1.5vw 2.63vw;
+    border-color: transparent transparent transparent #007bff;
+}
+
+#triangle-bottom {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 2.6vh 1.3vh 0 1.3vh;
+    border-color: #007bff transparent transparent transparent;
+}
+
+@font-face {
+    font-family: 'Bahnschrift';
+    src: url('fonts/Bahnschrift.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }

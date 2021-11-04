@@ -30,7 +30,7 @@ function init() {
         myObjects.remove(shownObjects).removeFromMap(map);
     }
     
-    document.getElementById("year_confirm").onclick = checkState;
+    // document.getElementById("year_confirm").onclick = checkState;
 
     window.myObjects = ymaps.geoQuery({
         type: "FeatureCollection",
