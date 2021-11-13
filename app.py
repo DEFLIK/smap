@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from markupsafe import escape
 
@@ -32,7 +32,7 @@ test_data = [
 
 @app.route('/', methods=['GET'])
 def get_cords():
-    return jsonify(test_data)
+    return render_template('index.html')
 
 
 @app.route('/', methods=['POST'])
