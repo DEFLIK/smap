@@ -1,5 +1,4 @@
-from flask import Flask, url_for, request, render_template
-import jyserver.Flask as jsf
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from markupsafe import escape
 
@@ -19,16 +18,32 @@ app = Flask(__name__)
 #
 # db.create_all()
 
-@jsf.use(app)
-class JSConnectedApp:
-    def __init__(self):
-        self.count = 0
+test_data = [
+    {
+        'title': 'test 1',
+        'description': 'GET, POST routes'
+    },
+    {
+        'title': 'test 2',
+        'description': 'PUT DELETE routes'
+    }
+]
 
-    def increment(self):
-        self.count += 1
-        self.js.document.getElementById("count").innerHTML = self.count
+
+@app.route('/', methods=['GET'])
+def get_cords():
+    return jsonify(test_data)
 
 
-@app.route('/')
-def main():
-    return render_template('index.html')
+@app.route('/', methods=['POST'])
+def add_cords():
+    test_data.append(request.json)
+    return jsonify(test_data)
+
+
+if __name__ == '__main__':
+    app.run()
+
+
+
+
