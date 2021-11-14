@@ -1,8 +1,70 @@
+let addMarkers = function() {};
+let removeMarkers = function() {};
+
 function init() {
     let map = new ymaps.Map('map-main', {
-        center: [61.18781918293016,80.76567712426778],
+        center: [63.369315, 105.440191],
         zoom: 4
     });
+
+    let clusterer = new ymaps.Clusterer({preset: 'twirl#redClusterIcons'}),
+        collection = new ymaps.GeoObjectCollection(),
+        monitor;
+
+    map.geoObjects.add(clusterer);
+    map.geoObjects.add(collection);
+
+    addMarkers = function (featuresData) {
+        let newPlacemarks = createGeoObjects(featuresData);
+
+        clusterer.options.set({
+            gridSize: 30,
+            disableClickZoom: true
+        });
+
+        clusterer.balloon.events.add('open', function (e) {
+            var target = e.get('cluster');
+            var activeObject = target.state.get('activeObject');
+            
+            if (monitor) {
+                monitor.removeAll();
+            }
+            monitor = new ymaps.Monitor(target.state);
+            monitor.add('activeObject', requestBalloonData);
+            requestBalloonData(activeObject);
+        });
+
+        clusterer.add(newPlacemarks);
+    }
+
+    removeMarkers = function() {
+        clusterer.removeAll();
+        collection.removeAll();
+    }
+
+    function createGeoObjects (featuresData) {
+        var placemarks = [];
+
+        for (let mark of featuresData) {
+            let newPlacemark = new ymaps.Placemark(mark.geometry.coordinates, {
+                    'iconCaption': mark.properties.iconCaption,
+                    'hintContent': 'Нажмите, чтобы поулчить данные',
+                    'clusterCaption': mark.id,
+                    'id': mark.id
+                }, {
+                    'balloonPanelMaxMapArea': 0,
+                    'preset': 'islands#blueIcon',
+                    'openEmptyBalloon': true
+                });
+
+            newPlacemark.events.add('balloonopen', function (e) {requestBalloonData(newPlacemark)});
+            placemarks.push(newPlacemark);
+        }
+
+        return placemarks;
+    }
+
+    addMarkers(featuresData);
 
     map.controls.remove('geolocationControl');
     map.controls.remove('searchControl');
@@ -12,85 +74,79 @@ function init() {
     map.controls.remove('zoomControl');
     map.controls.remove('rulerControl');
 
-    //let mark = new ymaps.Placemark([56.008727690977224,38.3746564765625], {}, {});
-    //map.geoObjects.add(mark);
 
-    //to refactor...
-    function checkState () {
-        let shownObjects,
-            byYear = new ymaps.GeoQueryResult(),
-            year = parseInt(document.getElementById("year").value),
-            offset = parseInt(document.getElementById("year_offset").value);
+    // map = new ymaps.Map('map-main', {
+    //     center: [61.18781918293016,80.76567712426778],
+    //     zoom: 4
+    // }, 
+    // {
+    //     searchControlProvider: 'yandex#search'
+    // }),
+    // objectManager = new ymaps.ObjectManager({
+    //     // Чтобы метки начали кластеризоваться, выставляем опцию.
+    //     clusterize: true,
+    //     // ObjectManager принимает те же опции, что и кластеризатор.
+    //     gridSize: 32,
+    //     clusterDisableClickZoom: true
+    // });
+
+    // map.controls.remove('geolocationControl');
+    // map.controls.remove('searchControl');
+    // map.controls.remove('trafficControl');
+    // map.controls.remove('typeSelector');
+    // map.controls.remove('fullscreenControl');
+    // map.controls.remove('zoomControl');
+    // map.controls.remove('rulerControl');
+
+    // //let mark = new ymaps.Placemark([56.008727690977224,38.3746564765625], {}, {});
+    // //map.geoObjects.add(mark);
+
+    // //to refactor...
+    // function checkState () {
+    //     let shownObjects,
+    //         byYear = new ymaps.GeoQueryResult(),
+    //         year = parseInt(document.getElementById("year").value),
+    //         offset = parseInt(document.getElementById("year_offset").value);
         
-        byYear = myObjects
-            .search(`properties.iconCaption <= ${year + offset}`)
-            .search(`properties.iconCaption >= ${year - offset}`)
-            .add(byYear);
-        shownObjects = byYear.addToMap(map);
-        myObjects.remove(shownObjects).removeFromMap(map);
-    }
+    //     byYear = myObjects
+    //         .search(`properties.iconCaption <= ${year + offset}`)
+    //         .search(`properties.iconCaption >= ${year - offset}`)
+    //         .add(byYear);
+    //     shownObjects = byYear.addToMap(map);
+    //     myObjects.remove(shownObjects).removeFromMap(map);
+    // }
     
-    // document.getElementById("year_confirm").onclick = checkState;
+    // // document.getElementById("year_confirm").onclick = checkState;
 
-    window.myObjects = ymaps.geoQuery({
-        type: "FeatureCollection",
-        features: [
-            {
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [55.75244503863624,37.62483958203125]
-                },
-                options: {
-                    preset: 'islands#redIcon'
-                },
-                properties: {
-                    iconCaption: 1980
-                }
-            },
-            {
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [56.323598901531085,43.99843423162029],
-                },
-                options: {
-                    preset: 'islands#redIcon',
-                },
-                properties: {
-                    iconCaption: 1968
-                }
-            },
-            {
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [56.802627826607775,60.5945129422139],
-                },
-                options: {
-                    preset: 'islands#redIcon'
-                },
-                properties: {
-                    iconCaption: 1957
-                }
-            },
-            {
-                type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: [58.00044835109676,56.17800903596389],
-                },
-                options: {
-                    preset: 'islands#redIcon'
-                },
-                properties: {
-                    iconCaption: 1973
-                }
-            }
-        ]
-    }).addToMap(map);
+    // objectManager.objects.options.set('preset', 'islands#darkGreenCircleDotIcon');
+    // objectManager.clusters.options.set('preset', 'islands#invertedDarkGreenClusterIcons');
+    // map.geoObjects.add(objectManager);
+    // objectManager.add(featuresData);
+
+    // // window.myObjects = ymaps.geoQuery({
+    // //     type: "FeatureCollection",
+    // //     features: featuresData
+    // // }).addToMap(map);
 }
 
+// function newpins () {
+//     map.geoObjects.removeAll();
+//     objectManager.removeAll();
+
+//     objectManager = new ymaps.ObjectManager({
+//         // Чтобы метки начали кластеризоваться, выставляем опцию.
+//         clusterize: true,
+//         // ObjectManager принимает те же опции, что и кластеризатор.
+//         gridSize: 32,
+//         clusterDisableClickZoom: true
+//     });
+    
+//     objectManager.objects.options.set('preset', 'islands#darkGreenCircleDotIcon');
+//     objectManager.clusters.options.set('preset', 'islands#invertedDarkGreenClusterIcons');
+//     map.geoObjects.add(objectManager);
+
+//     objectManager.add(featuresData);
+// }
 
 let promise = ymaps.ready(init);
 promise.done((ym) => {
