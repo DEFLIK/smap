@@ -39,6 +39,8 @@ window.onload = function () {
         contentType: "application/json"
     }).done(function (json) {
         featuresData = json;
+        removeMarkers();
+        addMarkers(featuresData);
     });
 }
 
