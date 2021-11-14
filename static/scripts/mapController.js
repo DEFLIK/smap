@@ -49,7 +49,7 @@ function init() {
             let newPlacemark = new ymaps.Placemark(mark.geometry.coordinates, {
                     'iconCaption': mark.properties.iconCaption,
                     'hintContent': 'Нажмите, чтобы поулчить данные',
-                    'clusterCaption': mark.id,
+                    'clusterCaption': mark.properties.iconCaption,
                     'id': mark.id
                 }, {
                     'balloonPanelMaxMapArea': 0,

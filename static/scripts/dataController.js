@@ -11,7 +11,7 @@ let featuresData = []
 button.onclick = function() {
     $(document).ready(function () {
         req = $.ajax({
-            url: '/',
+            url: '/cords/add',
             type: 'POST',
             dataType: "json",
             contentType: "application/json; charset=utf-8",
@@ -34,7 +34,7 @@ button.onclick = function() {
 
 window.onload = function () {
     req = $.ajax({
-        url: '/',
+        url: '/cords/get',
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
@@ -50,10 +50,10 @@ function requestBalloonData(placemark) {
     placemark.properties.set('balloonContent', "Загрузка данных с сервера...");
     
     $.ajax({
-        url: `/${placemark.properties.get('id')}`,
+        url: `/cords/get/${placemark.properties.get('id')}`,
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
-        placemark.properties.set('balloonContent', json.info);
+        placemark.properties.set('balloonContent', `${placemark.properties.get('id')}: ${json.info}`);
     })
 }

@@ -11,34 +11,10 @@ db.init_app(app)
 
 @app.route('/', methods=['GET'])
 def get_template():
-    if request.content_type == 'application/json':
-        res = []
-        with open('db.csv', newline='') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',', quotechar='|')
-            first = True
-            for row in reader:
-                if first:
-                    first = False
-                    continue
-                res.append({
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Point',
-                        'coordinates': [row[1], row[2]]
-                    },
-                    'options': {
-                        'preset': 'islands#redIcon'
-                    },
-                    'properties': {
-                        'iconCaption': row[3]
-                    },
-                    'id': row[0]})
-
-        return jsonify(res)
     return render_template('index.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/cords/add', methods=['POST'])
 def add_cords():
     js = request.json
     res = []
@@ -68,7 +44,7 @@ def add_cords():
     return jsonify(res)
 
 
-@app.route('/<id>', methods=['GET'])
+@app.route('/cords/get/<id>', methods=['GET'])
 def get_info(id: str):
     res = ''
     with open('db.csv', newline='') as csvfile:
@@ -78,6 +54,34 @@ def get_info(id: str):
                 res = row[4]
 
     return jsonify({'info': res})
+
+
+@app.route('/cords/get', methods=['GET'])
+def get_cords():
+    if request.content_type == 'application/json':
+        res = []
+        with open('db.csv', newline='') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            first = True
+            for row in reader:
+                if first:
+                    first = False
+                    continue
+                res.append({
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [row[1], row[2]]
+                    },
+                    'options': {
+                        'preset': 'islands#redIcon'
+                    },
+                    'properties': {
+                        'iconCaption': row[3]
+                    },
+                    'id': row[0]})
+
+        return jsonify(res)
 
 
 if __name__ == '__main__':
