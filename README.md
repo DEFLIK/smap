@@ -1,2 +1,2 @@
 # smap
-For a preview go to https://deflik.github.io/smap/raw_index
+For a preview go to https://deflik-smap.herokuapp.com/
