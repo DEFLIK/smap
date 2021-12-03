@@ -3,7 +3,7 @@ let removeMarkers = function() {};
 
 function init() {
     let map = new ymaps.Map('map-main', {
-        center: [63.369315, 105.440191],
+        center: [56.981750014637555,49.34446269050328],
         zoom: 4
     });
 
@@ -30,8 +30,8 @@ function init() {
                 monitor.removeAll();
             }
             monitor = new ymaps.Monitor(target.state);
-            monitor.add('activeObject', requestBalloonData);
-            requestBalloonData(activeObject);
+            monitor.add('activeObject', requestMarkData);
+            requestMarkData(activeObject);
         });
 
         clusterer.add(newPlacemarks);
@@ -46,18 +46,22 @@ function init() {
         var placemarks = [];
 
         for (let mark of featuresData) {
-            let newPlacemark = new ymaps.Placemark(mark.geometry.coordinates, {
-                    'iconCaption': mark.properties.iconCaption,
+            let newPlacemark = new ymaps.Placemark([mark.latitude, mark.longitude], {
+                    'iconCaption': mark.count,
                     'hintContent': 'Нажмите, чтобы поулчить данные',
-                    'clusterCaption': mark.properties.iconCaption,
-                    'id': mark.id
+                    'clusterCaption': mark.city,
+                    'id': mark.id_address
                 }, {
                     'balloonPanelMaxMapArea': 0,
                     'preset': 'islands#blueIcon',
-                    'openEmptyBalloon': true
+                    'openEmptyBalloon': true,
+                    'openBalloonOnClick': false
                 });
 
-            newPlacemark.events.add('balloonopen', function (e) {requestBalloonData(newPlacemark)});
+            newPlacemark.events.add('click', function () {
+                requestMarkData(newPlacemark);
+            });
+            //newPlacemark.events.add('balloonopen', function (e) {requestBalloonData(newPlacemark)});
             placemarks.push(newPlacemark);
         }
 

@@ -30,7 +30,7 @@ class Award(db.Model):
     id_award = db.Column(db.Integer, primary_key=True)
     id_award_name = db.Column(db.Integer, db.ForeignKey('award_name.id_award_name'), nullable=False)
     award_rank = db.Column(db.Integer, nullable=True)
-    id_award_year = db.Column(db.Integer, nullable=False)
+    id_award_year = db.Column(db.Integer, db.ForeignKey("award_year.id_award_year"), nullable=False)
     award_achievement = db.Column(db.String(512), nullable=True)
     id_knowledge_field = db.Column(db.Integer, db.ForeignKey('knowledge_field.id_knowledge_field'), nullable=False)
     award_receiving = db.relationship("AwardReceiving", back_populates="award")
