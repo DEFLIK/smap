@@ -51,8 +51,8 @@ function requestMarkData(placemark) {
 
     // placemark.properties.set('balloonContent', "Загрузка данных с сервера...");
     const cityName = placemark.properties.get('clusterCaption');
-    tabRight.classList.add('tab-right-active');
-    infoButton.classList.add('info-btn-active');
+    $('.tab-right').addClass('tab-right-active');
+    $('.info-btn').addClass('info-btn-active');
     clearInfoList();
     setInfoLoader();
 

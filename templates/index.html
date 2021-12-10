@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>smap test</title>
-        <link rel="stylesheet" href="/static/styles/style.css">
+        <link rel="stylesheet" href="/static/styles/style_map.css">
+        <link rel="stylesheet" href="/static/styles/style_overview.css">
+        <link rel="stylesheet" href="/static/styles/style_tab_left.css">
+        <link rel="stylesheet" href="/static/styles/style_tab_right.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="shortcut icon" href="/static/resources/favicon.ico">
     </head>
@@ -38,114 +41,128 @@
                 </div>
                 <div class="filter">
                     <ul class="filter-list">
-                        <div class="filter-option">
-                            <div class="filter-option-btn">
-                                <p>Год</p>
-                                <img class="filter-option-btn-icon" src="/static/resources/triangle_white.svg"> 
-                            </div>
-                            <div class="filter-settings">
-                                <div class="filter-settings-shadow"></div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-                                <div class="filter-setting">aasadsada</div>
-
+                        <div class="filter-option" style="background-image: url(/static/resources/person.svg);">
+                            <div class="filter-expander">
+                                <span class="filter-text">ФИО ларуеата</span>
+                                <img src="/static/resources/triangle_white.svg">
+                                <div class="filter-settings">
+                                    <div class="filter-settings-shadow"></div>
+                                    <ul class="filter-settings-list">
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="filter-option">
-                            <div class="filter-option-btn">
-                                <p>Степень премии</p>
-                                <img class="filter-option-btn-icon" src="/static/resources/triangle_white.svg"> 
-                            </div>
-                            <div class="filter-settings">
-                                <div class="filter-settings-shadow"></div>
-                                <div class="filter-setting">aasadsada</div>
-                            </div>
-                        </div>
-                        <div class="filter-option">
-                            <div class="filter-option-btn">
-                                <p>Область знания</p>
-                                <img class="filter-option-btn-icon" src="/static/resources/triangle_white.svg"> 
-                            </div>
-                            <div class="filter-settings">
-                                <div class="filter-settings-shadow"></div>
-                                <div class="filter-setting">aasadsada</div>
-                            </div>
-                        </div>
-                        <div class="filter-option">
-                            <div class="filter-option-btn">
-                                <p>Премия</p>
-                                <img class="filter-option-btn-icon" src="/static/resources/triangle_white.svg"> 
-                            </div>
-                            <div class="filter-settings">
-                                <div class="filter-settings-shadow"></div>
-                                <div class="filter-setting">aasadsada</div>
+                        <div class="filter-option" style="background-image: url(/static/resources/calendar.svg);">
+                            <div class="filter-expander">
+                                <span class="filter-text">Диапазон лет</span>
+                                <img src="/static/resources/triangle_white.svg">
+                                <div class="filter-settings">
+                                    <div class="filter-settings-shadow"></div>
+                                    <ul class="filter-settings-list">
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="filter-option">
-                            <div class="filter-option-btn">
-                                <p>Организация</p>
-                                <img class="filter-option-btn-icon" src="/static/resources/triangle_white.svg"> 
-                            </div>
-                            <div class="filter-settings">
-                                <div class="filter-settings-shadow"></div>
-                                <div class="filter-setting">aasadsada</div>
-                            </div>
-                        </div>
-                        <div class="filter-option">
-                            <div class="filter-option-btn">
-                                <p>Город</p>
-                                <img class="filter-option-btn-icon" src="/static/resources/triangle_white.svg"> 
-                            </div>
-                            <div class="filter-settings">
-                                <div class="filter-settings-shadow"></div>
-                                <div class="filter-setting">aasadsada</div>
-                            </div>
-                        </div>
-                        <div class="filter-option">
-                            <div class="filter-option-btn">
-                                <p>ФИО</p>
-                                <img class="filter-option-btn-icon" src="/static/resources/triangle_white.svg"> 
-                            </div>
-                            <div class="filter-settings">
-                                <div class="filter-settings-shadow"></div>
-                                <div class="filter-setting">aasadsada</div>
+                        <div class="filter-option" style="background-image: url(/static/resources/subject.svg);">
+                            <div class="filter-expander">
+                                <span class="filter-text">Область знаний</span>
+                                <img src="/static/resources/triangle_white.svg">
+                                <div class="filter-settings">
+                                    <div class="filter-settings-shadow"></div>
+                                    <ul class="filter-settings-list">
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="filter-option">
-                            <div class="filter-option-btn">
-                                <p>Достижение</p>
-                                <img class="filter-option-btn-icon" src="/static/resources/triangle_white.svg"> 
+                        <div class="filter-option" style="background-image: url(/static/resources/premium.svg);">
+                            <div class="filter-expander">
+                                <span class="filter-text">Премия</span>
+                                <img src="/static/resources/triangle_white.svg">
+                                <div class="filter-settings">
+                                    <div class="filter-settings-shadow"></div>
+                                    <ul class="filter-settings-list">
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="filter-settings">
-                                <div class="filter-settings-shadow"></div>
-                                <div class="filter-setting">aasadsada</div>
+                        </div>
+                        <div class="filter-option" style="background-image: url(/static/resources/degree.svg);">
+                            <div class="filter-expander">
+                                <span class="filter-text">Степень премии</span>
+                                <img src="/static/resources/triangle_white.svg">
+                                <div class="filter-settings">
+                                    <div class="filter-settings-shadow"></div>
+                                    <ul class="filter-settings-list">
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-option" style="background-image: url(/static/resources/organization.svg);">
+                            <div class="filter-expander">
+                                <span class="filter-text">Организация</span>
+                                <img src="/static/resources/triangle_white.svg">
+                                <div class="filter-settings">
+                                    <div class="filter-settings-shadow"></div>
+                                    <ul class="filter-settings-list">
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                        <li>aaa</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </ul>
-                    <div class="filter-apply">
-                        <p>Применить</p>
-                    </div>
+                    <div class="filter-apply"></div>
                 </div>
             </div>
             <!-- <div id="slider-range"></div> -->

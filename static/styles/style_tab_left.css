@@ -1,0 +1,239 @@
+.tab-left {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vh;
+    position: fixed;
+    top:0; left: 12px;
+    pointer-events: none;
+}
+
+.filter-btn {
+    pointer-events: all;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: 140px; height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    border: solid 2pt #C3C3C3;
+    transition: 0.2s;
+}
+
+.filter-btn-active {
+    transition: 0.2s;
+    border-bottom-left-radius: unset;
+}
+
+.filter-btn:hover {
+    box-shadow: 0 0 3pt 2pt cornflowerblue;
+}
+
+.filter-btn p {
+    text-decoration: none;
+    align-self: center;
+    font-size: 21px;
+    margin: 0;
+    font-family: "Bahnschrift";
+}
+
+.filter-btn-icon {
+    display: inline-block;
+    align-self: center;
+    width: 14%;
+    transform-origin: middle;
+    transform: rotate(90deg);
+    transition: 0.3s;
+}
+
+.filter-btn-icon-active {
+    transform: rotateZ(-90deg);
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0;
+    transform-origin: top;
+    /* transform: scale3d(1, 0, 1); */
+    pointer-events: all;
+    transition: 0.2s;
+    z-index: -1;
+}
+
+.filter-active {
+    opacity: 1;
+    /* transform: scale3d(1, 1, 1); */
+}
+
+.filter-list {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    background-color: white;
+    border: solid 2pt #C3C3C3;
+    border-top: unset;
+    z-index: -2;
+}
+
+.filter-option {
+    display: block;
+    width: 35px;
+    height: 35px;
+    margin-top: 5px;
+    background-color: #6FB1F6;
+    border-radius: 50%;
+    background-size: 70% 70%;
+    background-position: 46.5% 50%;
+    background-repeat: no-repeat;
+}
+
+.filter-option-open {
+    /* background-color: white; */
+}
+
+.filter-option-open img {
+    /* filter: invert(100%); */
+}
+
+.filter-expander {
+    position: relative;
+    display: inline-flex;
+    left: 0;
+    height: 100%;
+    background-color: #6FB1F6;
+    border-radius: 50%;
+    max-width: 100%;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    z-index: -1;
+    transition: 
+        all 0.1s,
+        max-width 0.05s;
+}
+
+.filter-expander-open {
+    transform-style: preserve-3d;
+    padding-left: 55px;
+    padding-right: 25%;
+    border-top-left-radius: 50em;
+    border-bottom-left-radius: 50em;
+    border-top-right-radius: 20em;
+    border-bottom-right-radius: 20em;
+    min-width: 300%;
+    max-width: 700%;
+    overflow: visible;
+}
+
+.filter-expander span {
+    white-space: nowrap;;
+    font-size: 120%;
+    color: white;
+}
+
+.filter-expander img {
+    height: 60%;
+}
+
+.filter-expander-active {
+    /* border-bottom-right-radius: 0px; */
+    /* background-color: white; */
+    box-shadow: 0 0 3pt 3pt cornflowerblue;
+}
+
+.filter-expander-active span { 
+    /* color: black; */
+}
+
+.filter-expander-active img { 
+    /* filter: invert(100%); */
+}
+
+.filter-settings {
+    position: absolute;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    top: 100%;
+    width: calc(100% - 65px);
+    max-height: 0;
+    background-color: cornflowerblue;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: 0.1s;
+}
+
+.filter-settings-open {
+    visibility: visible;
+    background-color: white;
+    max-height: 500%;
+}
+
+.filter-settings-shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: translateZ(-1px);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.filter-settings-shadow-active {
+    box-shadow: 0 0 3pt 3pt cornflowerblue;
+}
+
+.filter-settings-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.filter-settings-list::-webkit-scrollbar {
+    width: 15px;
+}
+  
+.filter-settings-list::-webkit-scrollbar-track {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: transparent;
+}
+  
+.filter-settings-list::-webkit-scrollbar-thumb {
+    background-color: white;
+    box-shadow: inset 0 0 0 2pt cornflowerblue;
+    border: 3px solid transparent;
+    border-radius: 20px;
+    background-clip: content-box;
+}
+
+.filter-apply {
+    margin-top: 3px;
+    width: 30%;
+    height: 30px;
+    background-color: white;
+    border-radius: 10px;
+    border: solid 2pt #C3C3C3;
+    background-image: url(/static/resources/check.svg);
+    background-size: 80% 80%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+    transition: 0.3s;
+}
+
+.filter-apply:hover {
+    background-color: rgb(240, 236, 236);
+}

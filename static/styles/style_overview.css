@@ -1,0 +1,28 @@
+* {
+    font-family: Bahnschrift, serif;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+html { 
+    overflow: hidden; 
+}
+
+body {
+    margin: 0px;
+    background-color: white;
+}
+
+ul {
+    list-style-type: none;
+}
+
+@font-face {
+    font-family: 'Bahnschrift';
+    src: url('fonts/Bahnschrift.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

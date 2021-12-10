@@ -1,0 +1,28 @@
+#slider-range {
+    position: fixed;
+    top: 95%; left: 1%;
+    height: 1vh; width: 98%
+}
+
+.ui-slider.ui-slider-horizontal {
+    background: #889fb9;
+    border-radius: 20px;
+    height:12px;
+    border:none;
+}
+
+.ui-slider .ui-slider-handle {
+    justify-self: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 4px solid #BFE2FF;
+    background: #FFF;
+    z-index: 2;
+}
+
+.ui-slider .ui-slider-range {
+    background: #337AB7;
+    height:12px;
+}
