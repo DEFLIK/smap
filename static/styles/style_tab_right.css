@@ -8,7 +8,7 @@
     width: 25vw;
     min-width: 200px;
     height: 90vh;
-    transition: 0.5s;
+    transition: all 0.5s, width 0s;
 }
 
 .tab-right-active {
@@ -23,7 +23,7 @@
     height: 100%;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 3pt 2pt #C3C3C3;;
+    box-shadow: 0 0 3pt 2pt #C3C3C3;
 }
 
 .info-list {
@@ -61,7 +61,7 @@
 }
 
 .info-town {
-    width: 50%;
+    width: 100%;
     display: flex;
     font-size: large;
     align-items: center;

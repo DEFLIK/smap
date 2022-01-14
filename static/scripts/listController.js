@@ -62,3 +62,7 @@ function minimizeInfoElement(id) {
     $(`#${id} .info-element-table .info-additional`).remove()
     $(`#${id} .info-hide-icon`).removeClass('info-hide-icon-active');
 }
+
+function addSettingsToList(listClassName, data) {
+    
+}

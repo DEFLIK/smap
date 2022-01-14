@@ -1,0 +1,28 @@
+{
+  "name": "storymap",
+  "version": "1.0.0",
+  "description": "Цифровая карта с лауретами премий СССР с целью показать Екатеринбург-Свердловск как национального интеллектуального центра промышленной эпохи",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiD-9/storymap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kiD-9/storymap/issues"
+  },
+  "homepage": "https://github.com/kiD-9/storymap#readme",
+  "devDependencies": {
+    "@types/jquery": "^3.5.11",
+    "node-fetch": "^3.1.0",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
+}

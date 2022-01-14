@@ -33,31 +33,63 @@ let featuresData = []
 // }
 
 window.onload = function () {
-    req = $.ajax({
-        url: '/smapapi/v1.0/getCities?city=all&s_year=all&e_year=all&area=all&org=all&rank=all&award=all&username=all',
+    // $.ajax({
+    //     url: '/smap-api/v1.0/getNumberOfPeopleInCities?city=all&s_year=1940&e_year=1943&area=all&org=all&rank=1&award=all&username=all',
+    //     type: 'GET',
+    //     contentType: "application/json"
+    // }).done(function (json) {
+    //     featuresData = json;
+    //     removeMarkers();
+    //     addMarkers(featuresData);
+    // });
+
+    $.ajax({
+        url: '/smap-api/v1.0/getRanksForFilter',
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
-        featuresData = json;
-        removeMarkers();
-        addMarkers(featuresData);
+        $()
+    });
+
+    $.ajax({
+        url: '/smap-api/v1.0/getKnowledgeAreasForFilter',
+        type: 'GET',
+        contentType: "application/json"
+    }).done(function (json) {
+
+    });
+
+    $.ajax({
+        url: '/smap-api/v1.0/getAwardsNamesForFilter',
+        type: 'GET',
+        contentType: "application/json"
+    }).done(function (json) {
+
+    });
+
+    $.ajax({
+        url: '/smap-api/v1.0/getOrganizationsNamesForFilter',
+        type: 'GET',
+        contentType: "application/json"
+    }).done(function (json) {
+
     });
 }
 
-function requestMarkData(placemark) {
+function requestCityData(cityName) {
     // if (placemark.properties.get('balloonContent') !== undefined) {
     //     return;
     // }
 
     // placemark.properties.set('balloonContent', "Загрузка данных с сервера...");
-    const cityName = placemark.properties.get('clusterCaption');
+    // const cityName = placemark.properties.get('clusterCaption');
     $('.tab-right').addClass('tab-right-active');
     $('.info-btn').addClass('info-btn-active');
     clearInfoList();
     setInfoLoader();
 
     $.ajax({
-        url: `/smap-api/v1.0/getPersons?city=${cityName}&s_year=all&e_year=all&area=all&org=all&rank=all&award=all&username=all`,
+        url: `/smap-api/v1.0/getPeople?city=${cityName}&s_year=all&e_year=all&area=all&org=all&rank=1&award=all&username=all`,
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
@@ -69,7 +101,7 @@ function requestMarkData(placemark) {
 
 function requestFullInfo(id) {
     $.ajax({
-        url: `/smap-api/v1.0/getFullInfo?id_award_receiving=${id}`,
+        url: `/smap-api/v1.0/getMoreInfoAboutPerson?id_award_receiving=${id}`,
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {

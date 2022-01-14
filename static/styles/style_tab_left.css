@@ -17,7 +17,7 @@
     width: 140px; height: 40px;
     background-color: white;
     border-radius: 10px;
-    border: solid 2pt #C3C3C3;
+    border: solid 1.5pt #C3C3C3;
     transition: 0.2s;
 }
 
@@ -61,9 +61,11 @@
     pointer-events: all;
     transition: 0.2s;
     z-index: -1;
+    pointer-events: none;
 }
 
 .filter-active {
+    pointer-events: all;
     opacity: 1;
     /* transform: scale3d(1, 1, 1); */
 }
@@ -77,7 +79,7 @@
     align-items: center;
     width: 30%;
     background-color: white;
-    border: solid 2pt #C3C3C3;
+    border: solid 1.5pt #C3C3C3;
     border-top: unset;
     z-index: -2;
 }
@@ -113,7 +115,7 @@
     overflow: hidden;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+    gap: 30px;
     z-index: -1;
     transition: 
         all 0.1s,
@@ -169,10 +171,14 @@
     background-color: cornflowerblue;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    transition: 0.1s;
+    opacity: 0;
+    transition: 
+        all 0.2s,
+        opacity 0.05s;
 }
 
 .filter-settings-open {
+    opacity: 1;
     visibility: visible;
     background-color: white;
     max-height: 500%;
@@ -193,11 +199,20 @@
 }
 
 .filter-settings-list {
+    margin: 0;
+    gap: 5px;
+    padding: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
     display: flex;
+    align-items: center;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    width: 95%;
+    height: 95%;
     overflow: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
 }
 
 .filter-settings-list::-webkit-scrollbar {
@@ -211,11 +226,112 @@
 }
   
 .filter-settings-list::-webkit-scrollbar-thumb {
-    background-color: white;
-    box-shadow: inset 0 0 0 2pt cornflowerblue;
-    border: 3px solid transparent;
+    background-color: #C3C3C3;
+    border: 5px solid transparent;
     border-radius: 20px;
     background-clip: content-box;
+}
+
+.filter-settings-list input[type="checkbox"] {
+    display: none;
+}
+
+.filter-settings-list input[type="checkbox"]:checked + .filter-settings-option {
+    background-color: #B4D6FA;
+}
+
+.filter-settings-option {
+    background-color: #C3C3C3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.filter-settings-option:not(input[type="text"]):hover {
+    box-shadow: 0 0 0 1.5px #757575;
+}
+
+.filter-settings-option label {
+    width: 95%;
+    color: black;
+    text-align: center;
+}
+
+.filter-input {
+    font-size: 14px;
+    height: 25px;
+    width: 100%;
+    border: solid 1.5pt #767676;
+    border-radius: 10px;
+    outline: none;
+}
+
+.filter-years-list {
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 5px;
+}
+
+.filter-year {
+    text-align: center;
+    width: 55px;
+}
+
+.filter-year-icon {
+    width: 15px;
+}
+
+.filter-input-hint {
+    align-self: flex-start;
+    margin-top: 20px;
+    position: absolute;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    top: 100%;
+    overflow: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 3pt 2pt cornflowerblue;
+}
+
+.filter-input-hint-head {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+    height: 32px;
+    border-bottom: solid 2px #C3C3C3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.filter-input-hint-head img {
+    height: 50%;
+}
+
+.filter-input-hint-inner span:hover {
+    background-color: #E1E1E1;
+}
+
+.filter-input-hint-head span {
+    color: #767676;
+}
+
+.filter-input-hint-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-input-hint-inner span {
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .filter-apply {
@@ -224,7 +340,7 @@
     height: 30px;
     background-color: white;
     border-radius: 10px;
-    border: solid 2pt #C3C3C3;
+    border: solid 1.5pt #C3C3C3;
     background-image: url(/static/resources/check.svg);
     background-size: 80% 80%;
     background-position: center center;
@@ -237,3 +353,28 @@
 .filter-apply:hover {
     background-color: rgb(240, 236, 236);
 }
+
+/* .chosen {
+    width: 200px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: -5;
+}
+
+.chosen label {
+    background-color: #6FB1F6;
+}
+
+.chosen output {
+    margin-left: 10px;
+    background-color: #C3C3C3;
+} */
+
+/* .filter-settings-list option {
+    width: 100%;
+    padding: 0;
+    align-self: center;
+    text-align: center;
+} */

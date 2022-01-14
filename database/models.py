@@ -82,8 +82,8 @@ class Organization(db.Model):
 
 class Address(db.Model):
     id_address = db.Column(db.Integer, primary_key=True)
-    latitude = db.Column(db.DECIMAL(8, 6), nullable=False)
-    longitude = db.Column(db.DECIMAL(8, 6), nullable=False)
+    latitude = db.Column(db.DECIMAL(9, 6), nullable=True)
+    longitude = db.Column(db.DECIMAL(9, 6), nullable=True)
     city_name = db.Column(db.String(64), nullable=False)
     region_name = db.Column(db.String(128), nullable=True)
     organization = db.relationship("Organization", back_populates="address")

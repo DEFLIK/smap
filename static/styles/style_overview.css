@@ -20,6 +20,17 @@ ul {
     list-style-type: none;
 }
 
+.logo {
+    position: absolute;
+    text-align: center;
+    width: 700px;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: darkred;
+    pointer-events: none;
+}
+
 @font-face {
     font-family: 'Bahnschrift';
     src: url('fonts/Bahnschrift.ttf') format('truetype');

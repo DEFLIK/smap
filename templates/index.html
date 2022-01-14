@@ -7,17 +7,30 @@
         <link rel="stylesheet" href="/static/styles/style_overview.css">
         <link rel="stylesheet" href="/static/styles/style_tab_left.css">
         <link rel="stylesheet" href="/static/styles/style_tab_right.css">
+        <link rel="stylesheet" href="/static/styles/style_loader.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="shortcut icon" href="/static/resources/favicon.ico">
     </head>
 
     <body>
-        <header>
+        <header>     
         </header>
 
         <main>
             <div id="map-main" class="map"></div>
-            <div class="tab-right tab-right-active ">
+            <span class="logo">UNCONNECTED TO DATABSE, CHECK LOGS</span>
+            <div class="loader-background">
+                <div class="loader loader-map">
+                    <div class='loader-els'>
+                        <span class="loader-el"></span>
+                        <span class="loader-el"></span>
+                        <span class="loader-el"></span>
+                        <span class="loader-el"></span>
+                    </div>
+                    <span class="loader-text">Секунду, ищем данные...</span>
+                </div>
+            </div>
+            <div class="tab-right tab-right-active">
                 <img href="#" class="info-btn info-btn-active" src="/static/resources/triangle_grey.svg"></a>
                 <div class="info">
                     <div class="info-head">
@@ -43,27 +56,22 @@
                     <ul class="filter-list">
                         <div class="filter-option" style="background-image: url(/static/resources/person.svg);">
                             <div class="filter-expander">
-                                <span class="filter-text">ФИО ларуеата</span>
+                                <span class="filter-text">ФИО лауреата</span>
                                 <img src="/static/resources/triangle_white.svg">
                                 <div class="filter-settings">
                                     <div class="filter-settings-shadow"></div>
                                     <ul class="filter-settings-list">
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
+                                        <div class="filter-settings-option">
+                                            <input type="text" id="name" class="filter-input filter-input-name" autocomplete="off" placeholder="Напишите что-нибудь...">
+                                        </div>
                                     </ul>
+                                    <div class="filter-input-hint">
+                                        <div class="filter-input-hint-head">
+                                            <img src='/static/resources/lupa.svg'>
+                                            <span>Подсказки</span>
+                                        </div>
+                                        <div class="filter-input-hint-name-inner filter-input-hint-inner"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -73,22 +81,10 @@
                                 <img src="/static/resources/triangle_white.svg">
                                 <div class="filter-settings">
                                     <div class="filter-settings-shadow"></div>
-                                    <ul class="filter-settings-list">
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
+                                    <ul class="filter-settings-list filter-years-list">
+                                        <input type="text" id="start_year" class="filter-input filter-year" placeholder="Начало">
+                                        <img src="/static/resources/year_arrow.svg" class="filter-year-icon">
+                                        <input type="text" id="end_year" class="filter-input filter-year" placeholder="Конец">
                                     </ul>
                                 </div>
                             </div>
@@ -99,50 +95,32 @@
                                 <img src="/static/resources/triangle_white.svg">
                                 <div class="filter-settings">
                                     <div class="filter-settings-shadow"></div>
-                                    <ul class="filter-settings-list">
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
+                                    <ul class="filter-settings-list filter-knowledge" multiple>
+                                        
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="filter-option" style="background-image: url(/static/resources/premium.svg);">
                             <div class="filter-expander">
-                                <span class="filter-text">Премия</span>
+                                <span class="filter-text">Название премии</span>
                                 <img src="/static/resources/triangle_white.svg">
                                 <div class="filter-settings">
                                     <div class="filter-settings-shadow"></div>
-                                    <ul class="filter-settings-list">
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
+                                    <ul class="filter-settings-list filter-award" multiple>
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="filter-option" style="background-image: url(/static/resources/degree.svg);">
                             <div class="filter-expander">
-                                <span class="filter-text">Степень премии</span>
+                                <span class="filter-text">Степень</span>
                                 <img src="/static/resources/triangle_white.svg">
                                 <div class="filter-settings">
                                     <div class="filter-settings-shadow"></div>
-                                    <ul class="filter-settings-list">
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
+                                    <ul class="filter-settings-list filter-rank">
+
                                     </ul>
                                 </div>
                             </div>
@@ -154,10 +132,17 @@
                                 <div class="filter-settings">
                                     <div class="filter-settings-shadow"></div>
                                     <ul class="filter-settings-list">
-                                        <li>aaa</li>
-                                        <li>aaa</li>
-                                        <li>aaa</li>
+                                        <div class="filter-settings-option">
+                                            <input type="text" id="name" class="filter-input filter-input-org" autocomplete="off" placeholder="Напишите что-нибудь...">
+                                        </div>
                                     </ul>
+                                    <div class="filter-input-hint">
+                                        <div class="filter-input-hint-head">
+                                            <img src='/static/resources/lupa.svg'>
+                                            <span>Подсказки</span>
+                                        </div>
+                                        <div class="filter-input-hint-org-inner filter-input-hint-inner"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -168,12 +153,9 @@
             <!-- <div id="slider-range"></div> -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-            <script src="/static/scripts/sliderController.js"></script>
-            <script src="/static/scripts/menusController.js"></script>
             <script src="https://api-maps.yandex.ru/2.1/?apikey=none&lang=ru_RU"></script>
-            <script src="/static/scripts/dataController.js"></script>
-            <script src="/static/scripts/mapController.js"></script>
-            <script src="/static/scripts/listController.js"></script>
+            <script data-main="/static/scripts/index.js" src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+            <!-- <script src="/static/scripts/init.js"></script> -->
         </main>
         <footer>
         </footer>
