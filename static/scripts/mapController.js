@@ -140,7 +140,7 @@ define(["require", "exports", "./infoListController"], function (require, export
                     'balloonPanelMaxMapArea': 0,
                     'preset': 'islands#blueIcon',
                     'openEmptyBalloon': true,
-                    'openBalloonOnClick': false
+                    'openBalloonOnClick': false,
                 });
                 newPlacemark.events.add('click', function () {
                     infoListController_1.InfoListController.bindCityInfo(String(newPlacemark.properties.get('clusterCaption')), Number(newPlacemark.properties.get('iconCaption')));

@@ -64,5 +64,19 @@ function minimizeInfoElement(id) {
 }
 
 function addSettingsToList(listClassName, data) {
-    
+    for (let setting of data) {
+        $(`.${listClassName}`).append(
+            $('<li>').append(
+                $('<a>').append(setting).on('click', function () {
+                    $(`.${binder[listClassName]}`).html(this.innerHTML);
+                })
+            )
+        );
+    }
+}
+
+let binder = {
+    'filter-rank' : 'out-rank',
+    'filter-knowledge' : 'out-knowledge',
+    'filter-award' : 'out-award'
 }

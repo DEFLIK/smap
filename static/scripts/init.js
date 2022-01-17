@@ -43,7 +43,6 @@ define(["require", "exports", "./hashIndexer", "./data", "./filterMenuController
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        console.log("%cWarning: This is a code-review version without any data connected (due to database privacy reasons). If you want to get full experience go to: storymap-urfu.herokuapp.com", "padding: 5px; color: darkred; background-color: #6FB1F6; border-radius: 5px; font-size: 15px");
                         _a = data_1.DataStorage.bind;
                         return [4 /*yield*/, data_1.DataLoader.requestFilterInfo(data_1.FilterEndPointUrls.organizationNames)];
                     case 1:
@@ -72,12 +71,26 @@ define(["require", "exports", "./hashIndexer", "./data", "./filterMenuController
                         ranksResp = (_c.sent()).ranks;
                         filterMenu.updateFiltersOptions(ranksResp, awardsResp, knowlResp);
                         window['InfoListController'] = infoListController_1.InfoListController; // for public DOM usage
-                        $('.info-list').on('scroll', function () {
-                            if (this.offsetHeight + this.scrollTop >= this.scrollHeight) {
+                        $('.info-list').scroll(function () {
+                            if (this.offsetHeight + this.scrollTop >= this.scrollHeight && this.scrollTop !== 0) { // this.scrollTop !== 0 for necessary scroll event on list clearing
                                 infoListController_1.InfoListController.requestMoreInfo();
                             }
                         });
-                        filterMenu.loadCities(mapController, [loader, loaderBackground]);
+                        filterMenu.loadCities(mapController, [loader, loaderBackground]).finally(function () {
+                            if (localStorage.getItem('seenTutorial') !== 'true') {
+                                $('.about').addClass('about-active');
+                                $('.about-menu').addClass('about-menu-active');
+                            }
+                        });
+                        $('.about-close').on('click', function () {
+                            $('.about').removeClass('about-active');
+                            $('.about-menu').removeClass('about-menu-active');
+                            localStorage.setItem('seenTutorial', 'true');
+                        });
+                        $('.logo').on('click', function () {
+                            $('.about').addClass('about-active');
+                            $('.about-menu').addClass('about-menu-active');
+                        });
                         return [2 /*return*/];
                 }
             });

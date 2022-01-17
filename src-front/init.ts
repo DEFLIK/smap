@@ -35,11 +35,27 @@ window.onload = async function () {
     filterMenu.updateFiltersOptions(ranksResp, awardsResp, knowlResp);
 
     window['InfoListController'] = InfoListController // for public DOM usage
-    $('.info-list').on('scroll', function() { // to dynamic...
-        if (this.offsetHeight + this.scrollTop >= this.scrollHeight) {
+    $('.info-list').scroll(function() { // to dynamic...
+        if (this.offsetHeight + this.scrollTop >= this.scrollHeight && this.scrollTop !== 0) { // this.scrollTop !== 0 for necessary scroll event on list clearing
             InfoListController.requestMoreInfo();
         }
     })
 
-    filterMenu.loadCities(mapController, [loader, loaderBackground]);
+    filterMenu.loadCities(mapController, [loader, loaderBackground]).finally(() => {
+        if (localStorage.getItem('seenTutorial') !== 'true') {
+            $('.about').addClass('about-active');
+            $('.about-menu').addClass('about-menu-active');
+        }
+    });
+
+    $('.about-close').on('click', () => {
+        $('.about').removeClass('about-active');
+        $('.about-menu').removeClass('about-menu-active');
+        localStorage.setItem('seenTutorial', 'true');
+    })
+
+    $('.logo').on('click', () => {
+        $('.about').addClass('about-active');
+        $('.about-menu').addClass('about-menu-active');
+    })
 }

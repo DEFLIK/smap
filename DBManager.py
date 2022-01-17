@@ -6,19 +6,20 @@ from sqlalchemy import and_, or_
 
 
 class DataBaseManager:
-    def get_data(request_info: RequestInfo, app, db):
+    def get_data(request_info: RequestInfo, db):
         return db.session.query(AwardReceiving).join(
             db.session.query(Organization).join(Address).filter(and_(
                 DataBaseManager.get_organization_filter(request_info.organization),
                 DataBaseManager.get_city_filter(request_info.city))
             )).join(
+            db.session.query(Person).filter(
+                DataBaseManager.get_username_filter(request_info.username))).join(
             db.session.query(Award).join(KnowledgeField).join(AwardName).join(AwardYear).filter(and_(
                 DataBaseManager.get_award_name_filter(request_info.award),
                 DataBaseManager.get_area_filter(request_info.area),
                 DataBaseManager.get_year_filter(request_info.start_year, request_info.end_year),
-                DataBaseManager.get_rank_filter(request_info.rank)))).join(
-            db.session.query(Person).filter(
-                DataBaseManager.get_username_filter(request_info.username)))
+                DataBaseManager.get_rank_filter(request_info.rank)))).order_by(
+            db.session.query(AwardYear.award_year).join(Award).filter(Award.id_award == AwardReceiving.id_award))
 
     def check_rank(rank):
         if not rank:
@@ -41,7 +42,8 @@ class DataBaseManager:
     def get_people(request_info: RequestInfo, app, db):
         with app.app_context():
             answer = []
-            for data in DataBaseManager.get_data(request_info, app, db):
+            for data in DataBaseManager.get_data(request_info, db):
+                print(data)
                 answer.append({"id_award_receiving": data.id_award_receiving,
                                "person_full_name": Person.query.get(data.id_person).person_full_name,
                                "award_year": Award.query.get(data.id_award).award_year.award_year,
@@ -53,7 +55,7 @@ class DataBaseManager:
         with app.app_context():
             answer = []
             i = 0
-            for data in DataBaseManager.get_data(request_info, app, db):
+            for data in DataBaseManager.get_data(request_info, db):
                 if i >= start_index and i < start_index + 100:
                     answer.append({"id_award_receiving": data.id_award_receiving,
                                    "person_full_name": Person.query.get(data.id_person).person_full_name,
@@ -68,8 +70,8 @@ class DataBaseManager:
     def get_cities_info(request_info: RequestInfo, app, db):
         with app.app_context():
             if request_info.city != "all":
-                count = DataBaseManager.get_data(request_info, app, db).count()
-                address = Address.query.filter(Address.city_name == request_info.city).first()
+                count = DataBaseManager.get_data(request_info, db).count()
+                address = db.session.query(Address).filter(Address.city_name == request_info.city).first()
                 if not address:
                     return None
                 answer = {"id_address": address.id_address,
@@ -81,20 +83,11 @@ class DataBaseManager:
             answer = []
 
             for city, in db.session.query(Address.city_name):
-                count = db.session.query(AwardReceiving).join(
-                    db.session.query(Organization).join(Address).filter(and_(
-                        DataBaseManager.get_city_filter(city),
-                        DataBaseManager.get_organization_filter(request_info.organization))
-                    )).join(
-                    db.session.query(Award).join(KnowledgeField).join(AwardName).join(AwardYear).filter(and_(
-                        DataBaseManager.get_award_name_filter(request_info.award),
-                        DataBaseManager.get_area_filter(request_info.area),
-                        DataBaseManager.get_year_filter(request_info.start_year, request_info.end_year),
-                        DataBaseManager.get_rank_filter(request_info.rank)))).join(Person).filter(
-                    DataBaseManager.get_username_filter(request_info.username)).count()
+                request_info.city = city
+                count = DataBaseManager.get_data(request_info, db).count()
                 if count == 0:
                     continue
-                address = Address.query.filter(Address.city_name == city).first()
+                address = db.session.query(Address).filter(Address.city_name == request_info.city).first()
                 answer.append({"id_address": address.id_address,
                                "city": city,
                                "latitude": address.latitude,

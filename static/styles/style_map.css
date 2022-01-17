@@ -64,6 +64,7 @@
 }
 
 .popover-city {
+    cursor: pointer;
     padding-left: 3px;
     border-radius: 10px;
     width: 80%;
@@ -88,21 +89,4 @@
     border-radius: 10px;
     background-color: #6FB1F6;
     color: white;
-}
-
-.popover-content::-webkit-scrollbar {
-    width: 15px;
-  }
-  
-.popover-content::-webkit-scrollbar-track {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background: transparent;
-}
-  
-.popover-content::-webkit-scrollbar-thumb {
-    background-color: #C3C3C3;
-    border: 5px solid transparent;
-    border-radius: 20px;
-    background-clip: content-box;
 }

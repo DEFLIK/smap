@@ -5,6 +5,8 @@
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
+    scrollbar-color: #C3C3C3 transparent;
+    scrollbar-width: thin;
 }
 
 html { 
@@ -20,15 +22,36 @@ ul {
     list-style-type: none;
 }
 
+b {
+    font-weight: 100;
+    -webkit-text-stroke: 0.60px;
+}
+
 .logo {
     position: absolute;
     text-align: center;
-    width: 700px;
+    width: 40px;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    color: darkred;
-    pointer-events: none;
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 5px #ffffff); 
+    cursor: pointer;
+}
+
+*::-webkit-scrollbar {
+    width: 15px;
+}
+*::-webkit-scrollbar-track {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: transparent;
+}
+  
+*::-webkit-scrollbar-thumb {
+    background-color: #C3C3C3;
+    border: 5px solid transparent;
+    border-radius: 20px;
+    background-clip: content-box;
 }
 
 @font-face {

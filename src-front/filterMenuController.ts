@@ -4,7 +4,6 @@ import { HintsController } from "./hintsController";
 import { MapController } from "./mapController";
 import { StateController } from "./stateController";
 import { InfoListController } from "./infoListController";
-import { CityInfo } from "./endPointTypes";
 
 // To refactor
 export class FilterMenuController {
@@ -89,23 +88,17 @@ export class FilterMenuController {
             $('.filter').removeClass('filter-active');
             $('.filter-btn').removeClass('filter-btn-active');
             $('.filter-btn-icon').removeClass('filter-btn-icon-active');
-            InfoListController.hidePanel();
-            this.loadCities(mapController, loaders).then(() => {
-                InfoListController.setCityTitle('Выберите город');
-                InfoListController.clearInfoList();
-                InfoListController.addHint('Нажмите на метку города, чтобы посмотреть его информацию');
-            }, () => {
-                InfoListController.setCityTitle('Нет результатов :(');
-                InfoListController.clearInfoList();
-                InfoListController.addHint('Ничего не найдено. Попробуйте задать другие фильтры');
-            }).finally(() => {
-                InfoListController.showPanel();
-            });
+            this.applyRequest(mapController, loaders);
         });
         
         $('.filter-input-org').on('input', function() {
             $('.filter-input-hint-org-inner').empty();
             let resultIds = HintsController.getHints((this as HTMLInputElement).value.split(' ').filter(x => !!x), organisationIndexer, 5);
+            if (resultIds.length === 0) {
+                $('.filter-input-hint-org').removeClass('filter-input-hint-active');
+            } else {
+                $('.filter-input-hint-org').addClass('filter-input-hint-active');
+            }
             for (let i = 0; i < resultIds.length && i < 5; i++) {
                 $('.filter-input-hint-org-inner').append(
                     $('<span>').append(resultIds[i]).on('click', function() {
@@ -118,6 +111,11 @@ export class FilterMenuController {
         $('.filter-input-name').on('input', function() {
             $('.filter-input-hint-name-inner').empty();
             let resultWords = HintsController.getHints((this as HTMLInputElement).value.split(' ').filter(x => !!x), usernamesIndexer, 5);
+            if (resultWords.length === 0) {
+                $('.filter-input-hint-name').removeClass('filter-input-hint-active');
+            } else {
+                $('.filter-input-hint-name').addClass('filter-input-hint-active');
+            }
             for (let i = 0; i < resultWords.length && i < 5; i++) {
                 $('.filter-input-hint-name-inner').append(
                     $('<span>').append(resultWords[i]).on('click', function() {
@@ -125,6 +123,37 @@ export class FilterMenuController {
                     })
                 );
             }
+        });
+        $('.filter-clear-btn').on('click', () => {
+            $('.filter-clear').removeClass('filter-option-open');
+            $('.filter-clear .filter-expander').removeClass('filter-expander-active');
+            $('.filter-clear .filter-settings').removeClass('filter-settings-open');
+            $('.filter-clear .filter-settings-shadow').removeClass('filter-settings-shadow-active');
+            FilterMenuController.clearFilters();
+            this.applyRequest(mapController, loaders);
+        });
+        $(window).keydown((e) => {
+            if (e.key === 'Enter' && $('.filter-btn').hasClass('filter-btn-active')) {
+                $('.filter').removeClass('filter-active');
+                $('.filter-btn').removeClass('filter-btn-active');
+                $('.filter-btn-icon').removeClass('filter-btn-icon-active');
+                this.applyRequest(mapController, loaders);
+            }
+        })
+    }
+
+    public applyRequest(mapController: MapController, loaders: StateController[]) {
+        InfoListController.hidePanel();
+        this.loadCities(mapController, loaders).then(() => {
+            InfoListController.clearInfoList();
+            InfoListController.setCityTitle('Выберите город');
+            InfoListController.addHint('Нажмите на метку города, чтобы посмотреть его информацию');
+        }, () => {
+            InfoListController.clearInfoList();
+            InfoListController.setCityTitle('Нет результатов :(');
+            InfoListController.addHint('Ничего не найдено. Попробуйте задать другие фильтры');
+        }).finally(() => {
+            InfoListController.showPanel();
         });
     }
 
@@ -190,6 +219,22 @@ export class FilterMenuController {
         });
 
         return res.length === 0 ? ['all'] : res;
+    }
+
+    private static uncheckAll(groupName: string) {
+        $(`.${groupName} input[type="checkbox"]:checked`).each(function(){
+            (this as HTMLInputElement).checked = false;
+        });
+    }
+
+    public static clearFilters() {
+        $('.filter-input-name').val('');
+        $('#start_year').val('')
+        $('#end_year').val('')
+        $('.filter-input-org').val('')
+        this.uncheckAll('filter-knowledge');
+        this.uncheckAll('filter-award');
+        this.uncheckAll('filter-rank');
     }
 }
 

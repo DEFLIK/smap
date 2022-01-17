@@ -83,22 +83,17 @@ define(["require", "exports", "./data", "./hintsController", "./infoListControll
                 $('.filter').removeClass('filter-active');
                 $('.filter-btn').removeClass('filter-btn-active');
                 $('.filter-btn-icon').removeClass('filter-btn-icon-active');
-                infoListController_1.InfoListController.hidePanel();
-                _this.loadCities(mapController, loaders).then(function () {
-                    infoListController_1.InfoListController.setCityTitle('Выберите город');
-                    infoListController_1.InfoListController.clearInfoList();
-                    infoListController_1.InfoListController.addHint('Нажмите на метку города, чтобы посмотреть его информацию');
-                }, function () {
-                    infoListController_1.InfoListController.setCityTitle('Нет результатов :(');
-                    infoListController_1.InfoListController.clearInfoList();
-                    infoListController_1.InfoListController.addHint('Ничего не найдено. Попробуйте задать другие фильтры');
-                }).finally(function () {
-                    infoListController_1.InfoListController.showPanel();
-                });
+                _this.applyRequest(mapController, loaders);
             });
             $('.filter-input-org').on('input', function () {
                 $('.filter-input-hint-org-inner').empty();
                 var resultIds = hintsController_1.HintsController.getHints(this.value.split(' ').filter(function (x) { return !!x; }), organisationIndexer, 5);
+                if (resultIds.length === 0) {
+                    $('.filter-input-hint-org').removeClass('filter-input-hint-active');
+                }
+                else {
+                    $('.filter-input-hint-org').addClass('filter-input-hint-active');
+                }
                 var _loop_1 = function (i) {
                     $('.filter-input-hint-org-inner').append($('<span>').append(resultIds[i]).on('click', function () {
                         $('.filter-input-org').val("".concat(resultIds[i]));
@@ -111,6 +106,12 @@ define(["require", "exports", "./data", "./hintsController", "./infoListControll
             $('.filter-input-name').on('input', function () {
                 $('.filter-input-hint-name-inner').empty();
                 var resultWords = hintsController_1.HintsController.getHints(this.value.split(' ').filter(function (x) { return !!x; }), usernamesIndexer, 5);
+                if (resultWords.length === 0) {
+                    $('.filter-input-hint-name').removeClass('filter-input-hint-active');
+                }
+                else {
+                    $('.filter-input-hint-name').addClass('filter-input-hint-active');
+                }
                 var _loop_2 = function (i) {
                     $('.filter-input-hint-name-inner').append($('<span>').append(resultWords[i]).on('click', function () {
                         $('.filter-input-name').val("".concat(resultWords[i]));
@@ -118,6 +119,22 @@ define(["require", "exports", "./data", "./hintsController", "./infoListControll
                 };
                 for (var i = 0; i < resultWords.length && i < 5; i++) {
                     _loop_2(i);
+                }
+            });
+            $('.filter-clear-btn').on('click', function () {
+                $('.filter-clear').removeClass('filter-option-open');
+                $('.filter-clear .filter-expander').removeClass('filter-expander-active');
+                $('.filter-clear .filter-settings').removeClass('filter-settings-open');
+                $('.filter-clear .filter-settings-shadow').removeClass('filter-settings-shadow-active');
+                FilterMenuController.clearFilters();
+                _this.applyRequest(mapController, loaders);
+            });
+            $(window).keydown(function (e) {
+                if (e.key === 'Enter' && $('.filter-btn').hasClass('filter-btn-active')) {
+                    $('.filter').removeClass('filter-active');
+                    $('.filter-btn').removeClass('filter-btn-active');
+                    $('.filter-btn-icon').removeClass('filter-btn-icon-active');
+                    _this.applyRequest(mapController, loaders);
                 }
             });
         }
@@ -167,6 +184,20 @@ define(["require", "exports", "./data", "./hintsController", "./infoListControll
             enumerable: false,
             configurable: true
         });
+        FilterMenuController.prototype.applyRequest = function (mapController, loaders) {
+            infoListController_1.InfoListController.hidePanel();
+            this.loadCities(mapController, loaders).then(function () {
+                infoListController_1.InfoListController.clearInfoList();
+                infoListController_1.InfoListController.setCityTitle('Выберите город');
+                infoListController_1.InfoListController.addHint('Нажмите на метку города, чтобы посмотреть его информацию');
+            }, function () {
+                infoListController_1.InfoListController.clearInfoList();
+                infoListController_1.InfoListController.setCityTitle('Нет результатов :(');
+                infoListController_1.InfoListController.addHint('Ничего не найдено. Попробуйте задать другие фильтры');
+            }).finally(function () {
+                infoListController_1.InfoListController.showPanel();
+            });
+        };
         FilterMenuController.getFilters = function (cityName) {
             var years = this.years;
             return new data_1.FilterRequestSettings(years[0], years[1], this.knowledge, this.organisations, this.rank, this.award, this.username, cityName);
@@ -209,6 +240,20 @@ define(["require", "exports", "./data", "./hintsController", "./infoListControll
                 res.push($(this).val());
             });
             return res.length === 0 ? ['all'] : res;
+        };
+        FilterMenuController.uncheckAll = function (groupName) {
+            $(".".concat(groupName, " input[type=\"checkbox\"]:checked")).each(function () {
+                this.checked = false;
+            });
+        };
+        FilterMenuController.clearFilters = function () {
+            $('.filter-input-name').val('');
+            $('#start_year').val('');
+            $('#end_year').val('');
+            $('.filter-input-org').val('');
+            this.uncheckAll('filter-knowledge');
+            this.uncheckAll('filter-award');
+            this.uncheckAll('filter-rank');
         };
         return FilterMenuController;
     }());

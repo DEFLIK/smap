@@ -70,6 +70,7 @@
 }
 
 .info-btn {
+    cursor: pointer;
     display: inline-block;
     position: relative;
     padding: 1%;
@@ -94,6 +95,7 @@
 }
 
 .info-hide-icon {
+    cursor: pointer;
     width: 12%;
     align-self: flex-end;
     content: url("/static/resources/hide.svg");
@@ -105,21 +107,4 @@
 
 .info-hide-icon:hover {
     filter: drop-shadow(0 0 5px gray);
-}
-
-.info-list::-webkit-scrollbar {
-    width: 15px;
-  }
-  
-.info-list::-webkit-scrollbar-track {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background: transparent;
-}
-  
-.info-list::-webkit-scrollbar-thumb {
-    background-color: #C3C3C3;
-    border: 5px solid transparent;
-    border-radius: 20px;
-    background-clip: content-box;
 }

@@ -2,12 +2,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>smap test</title>
+        <title>StoryMap</title>
         <link rel="stylesheet" href="/static/styles/style_map.css">
         <link rel="stylesheet" href="/static/styles/style_overview.css">
         <link rel="stylesheet" href="/static/styles/style_tab_left.css">
         <link rel="stylesheet" href="/static/styles/style_tab_right.css">
         <link rel="stylesheet" href="/static/styles/style_loader.css">
+        <link rel="stylesheet" href="/static/styles/style_about.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="shortcut icon" href="/static/resources/favicon.ico">
     </head>
@@ -18,7 +19,63 @@
 
         <main>
             <div id="map-main" class="map"></div>
-            <span class="logo">UNCONNECTED TO DATABSE, CHECK LOGS</span>
+            <img class="logo" src="/static/resources/globe.svg">
+            <div class="about">
+                <div class="about-menu">
+                    <img class="about-logo" src="/static/resources/logo.svg">
+                    <ul class="about-list">
+                        <span class="about-el about-welcome">
+                            Добро пожаловать на StoryMap!<br>
+                            StoryMap - это цифровая карта лауреатов премий СССР, созданная с целью показать Екатеринбург-Свердловск как национально интеллектуальный центр промышленной эпохи.<br><br>
+                            Далее Вы научитесь пользоваться сервисом.
+                        </span>
+                        <div class="about-el">
+                            <img src="/static/resources/a-map.png">
+                            <span>
+                                В самом центре отображается главный элемент - карта. 
+                                На ней располагаются метки, каждая из которых является городом, содержащим некоторое количество записей о полученных премиях.
+                                Чтобы подробнее узнать о премии, следует кликнуть по метке.<br><br>
+                                Также города могут собираться в кластеры, чтобы вам было удобнее просматривать карту. Каждый кластер можно открыть с помощью клика. Вам откроется список городов, которые вы можете выбрать.
+                            </span>
+                        </div>
+                        <div class="about-el">
+                            <span>
+                                Справа находится панель информации. 
+                                В ней будут отображаться все записи конкретного города.
+                                У каждой записи есть подробная информация. Чтобы посмотреть ее, следует кликнуть по значку глаза.<br><br>
+                                Если она вам мешает, есть возможность свернуть ее, нажав на треугольник слева от панели.
+                            </span>
+                            <img src="/static/resources/a-info.png">
+                        </div>
+                        <div class="about-el">
+                            <img src="/static/resources/a-filter.png">
+                            <span>
+                                Слева находится кнопка фильтров, при нажатии на которую открывается меню настроек фильтров.
+                                В каждой опции вы можете указать нужные вам значения.
+                            </span>
+                        </div>
+                        <div class="about-el">
+                            <span>
+                                Для настроек, требующих ввод с клавиатуры, вам будут представлены подсказки, с помощью клика на которые можно дополнить желаемое значение.
+                            </span>
+                            <img src="/static/resources/a-input.png">
+                        </div>
+                        <div class="about-el">
+                            <img src="/static/resources/a-apply.png">
+                            <span>
+                                Чтобы подтвердить фильтры, требуется либо нажать на галочку в конце панели, либо нажать на клавишу [Enter].
+                            </span>
+                        </div>
+                        <div class="about-el">
+                            <span>
+                                Если вы хотите отменить выбранные фильтры, то это можно сделать с помощью опции "Сбросить фильтры".
+                            </span>
+                            <img src="/static/resources/a-clear.png">
+                        </div>
+                    </ul>
+                    <div class="about-close">Хорошо, больше не показывать</div>
+                </div>
+            </div>
             <div class="loader-background">
                 <div class="loader loader-map">
                     <div class='loader-els'>
@@ -62,10 +119,10 @@
                                     <div class="filter-settings-shadow"></div>
                                     <ul class="filter-settings-list">
                                         <div class="filter-settings-option">
-                                            <input type="text" id="name" class="filter-input filter-input-name" autocomplete="off" placeholder="Напишите что-нибудь...">
+                                            <input type="text" id="name" class="filter-input filter-input-name" autocomplete="off" placeholder="Введите что-нибудь...">
                                         </div>
                                     </ul>
-                                    <div class="filter-input-hint">
+                                    <div class="filter-input-hint filter-input-hint-name">
                                         <div class="filter-input-hint-head">
                                             <img src='/static/resources/lupa.svg'>
                                             <span>Подсказки</span>
@@ -133,16 +190,32 @@
                                     <div class="filter-settings-shadow"></div>
                                     <ul class="filter-settings-list">
                                         <div class="filter-settings-option">
-                                            <input type="text" id="name" class="filter-input filter-input-org" autocomplete="off" placeholder="Напишите что-нибудь...">
+                                            <input type="text" id="name" class="filter-input filter-input-org" autocomplete="off" placeholder="Введите что-нибудь...">
                                         </div>
                                     </ul>
-                                    <div class="filter-input-hint">
+                                    <div class="filter-input-hint filter-input-hint-org">
                                         <div class="filter-input-hint-head">
                                             <img src='/static/resources/lupa.svg'>
                                             <span>Подсказки</span>
                                         </div>
                                         <div class="filter-input-hint-org-inner filter-input-hint-inner"></div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-option filter-clear" style="background-image: url(/static/resources/clear.svg);">
+                            <div class="filter-expander">
+                                <span class="filter-text">Сбросить фильтры</span>
+                                <img src="/static/resources/triangle_white.svg">
+                                <div class="filter-settings">
+                                    <div class="filter-settings-shadow"></div>
+                                    <ul class="filter-settings-list">
+                                        <span class="filter-clear-text">Все настройки фильтров будут сброшены</span>
+                                        <div class="filter-clear-btn">
+                                            <img src="/static/resources/check.svg" class="filter-clear-btn-icon">
+                                            <span>Принять</span>
+                                        </div>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

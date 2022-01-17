@@ -8,6 +8,13 @@ let dataInfo = document.querySelector('.data-info');
 let out = document.querySelector('.out-info');
 let featuresData = []
 
+let organIndexer;
+let organ;
+let namesIndexer;
+let names;
+// let namesIndexer;
+// let names;
+
 // submitButton.onclick = function() {
 //     $(document).ready(function () {
 //         req = $.ajax({
@@ -33,22 +40,15 @@ let featuresData = []
 // }
 
 window.onload = function () {
-    // $.ajax({
-    //     url: '/smap-api/v1.0/getNumberOfPeopleInCities?city=all&s_year=1940&e_year=1943&area=all&org=all&rank=1&award=all&username=all',
-    //     type: 'GET',
-    //     contentType: "application/json"
-    // }).done(function (json) {
-    //     featuresData = json;
-    //     removeMarkers();
-    //     addMarkers(featuresData);
-    // });
+    requestFilteredData('all', 'all', 'all', 'all', 'all', 'all', 'all');
 
     $.ajax({
         url: '/smap-api/v1.0/getRanksForFilter',
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
-        $()
+        let ranks = json.ranks;
+        addSettingsToList('filter-rank', ranks);
     });
 
     $.ajax({
@@ -56,7 +56,8 @@ window.onload = function () {
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
-
+        let know = json.knowledge_areas;
+        addSettingsToList('filter-knowledge', know);
     });
 
     $.ajax({
@@ -64,7 +65,8 @@ window.onload = function () {
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
-
+        let awards = json.awards_names; //3
+        addSettingsToList('filter-award', awards);
     });
 
     $.ajax({
@@ -72,7 +74,17 @@ window.onload = function () {
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
+        organ = Array.from(new Set(json.organizations_names));
+        organIndexer = new Indexer(organ);
+    });
 
+    $.ajax({
+        url: '/smap-api/v1.0/getUsernamesForFilter',
+        type: 'GET',
+        contentType: "application/json"
+    }).done(function (json) {
+        names = Array.from(new Set(json.usernames));
+        namesIndexer = new Indexer(names);
     });
 }
 
@@ -87,9 +99,16 @@ function requestCityData(cityName) {
     $('.info-btn').addClass('info-btn-active');
     clearInfoList();
     setInfoLoader();
+    let syear = $('.out-syear').html()
+    let eyear = $('.out-eyear').html()
+    let area = $('.out-knowledge').html()
+    let org = $('.out-org').html()
+    let rank = $('.out-rank').html()
+    let award = $('.out-award').html()
+    let username = $('.out-name').html()
 
     $.ajax({
-        url: `/smap-api/v1.0/getPeople?city=${cityName}&s_year=all&e_year=all&area=all&org=all&rank=1&award=all&username=all`,
+        url: `/smap-api/v1.0/getPeople?city=${cityName}&s_year=${syear}&e_year=${eyear}&area=${area}&org=${org}&rank=${rank}&award=${award}&username=${username}`,
         type: 'GET',
         contentType: "application/json"
     }).done(function (json) {
@@ -108,4 +127,18 @@ function requestFullInfo(id) {
         //placemark.properties.set('balloonContent', `${placemark.properties.get('id')}: ${json.info}`);
         appendInfoElement(id, json);
     })
+}
+
+function requestFilteredData(syear, eyear, area, org, rank, award, username) {
+    $.ajax({
+        url: `/smap-api/v1.0/getNumberOfPeopleInCities?city=all&s_year=${syear}&e_year=${eyear}&area=${area}&org=${org}&rank=${rank}&award=${award}&username=${username}`,
+        type: 'GET',
+        contentType: "application/json"
+    }).done(function (json) {
+        featuresData = json;
+        removeMarkers();
+        addMarkers(featuresData);
+    }).catch(() => {
+        removeMarkers();
+    });
 }

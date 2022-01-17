@@ -136,7 +136,7 @@ export class MapController {
                     'balloonPanelMaxMapArea': 0,
                     'preset': 'islands#blueIcon',
                     'openEmptyBalloon': true,
-                    'openBalloonOnClick': false
+                    'openBalloonOnClick': false,
                 });
 
             newPlacemark.events.add('click', function () {

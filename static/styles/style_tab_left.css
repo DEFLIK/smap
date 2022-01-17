@@ -8,6 +8,7 @@
 }
 
 .filter-btn {
+    cursor: pointer;
     pointer-events: all;
     display: flex;
     gap: 10px;
@@ -17,7 +18,7 @@
     width: 140px; height: 40px;
     background-color: white;
     border-radius: 10px;
-    border: solid 1.5pt #C3C3C3;
+    border: solid 1.4pt #C3C3C3;
     transition: 0.2s;
 }
 
@@ -43,12 +44,12 @@
     align-self: center;
     width: 14%;
     transform-origin: middle;
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
     transition: 0.3s;
 }
 
 .filter-btn-icon-active {
-    transform: rotateZ(-90deg);
+    transform: rotateZ(90deg);
 }
 
 .filter {
@@ -79,12 +80,13 @@
     align-items: center;
     width: 30%;
     background-color: white;
-    border: solid 1.5pt #C3C3C3;
+    border: solid 1.4pt #C3C3C3;
     border-top: unset;
     z-index: -2;
 }
 
 .filter-option {
+    cursor: pointer;
     display: block;
     width: 35px;
     height: 35px;
@@ -92,7 +94,7 @@
     background-color: #6FB1F6;
     border-radius: 50%;
     background-size: 70% 70%;
-    background-position: 46.5% 50%;
+    background-position: center center;
     background-repeat: no-repeat;
 }
 
@@ -135,14 +137,15 @@
     overflow: visible;
 }
 
-.filter-expander span {
-    white-space: nowrap;;
+.filter-text {
+    white-space: nowrap;
     font-size: 120%;
     color: white;
 }
 
-.filter-expander img {
+.filter-expander > img {
     height: 60%;
+    transition: transform 0.3s;
 }
 
 .filter-expander-active {
@@ -155,11 +158,12 @@
     /* color: black; */
 }
 
-.filter-expander-active img { 
-    /* filter: invert(100%); */
+.filter-expander-active > img { 
+    transform: rotate(180deg);
 }
 
 .filter-settings {
+    cursor: default;
     position: absolute;
     transform-style: preserve-3d;
     display: flex;
@@ -168,7 +172,7 @@
     top: 100%;
     width: calc(100% - 65px);
     max-height: 0;
-    background-color: cornflowerblue;
+    /* background-color: cornflowerblue; */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     opacity: 0;
@@ -199,6 +203,7 @@
 }
 
 .filter-settings-list {
+    cursor: default;
     margin: 0;
     gap: 5px;
     padding: 0;
@@ -213,23 +218,6 @@
     background-color: transparent;
     border: none;
     outline: none;
-}
-
-.filter-settings-list::-webkit-scrollbar {
-    width: 15px;
-}
-  
-.filter-settings-list::-webkit-scrollbar-track {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background: transparent;
-}
-  
-.filter-settings-list::-webkit-scrollbar-thumb {
-    background-color: #C3C3C3;
-    border: 5px solid transparent;
-    border-radius: 20px;
-    background-clip: content-box;
 }
 
 .filter-settings-list input[type="checkbox"] {
@@ -250,6 +238,10 @@
     padding: 0;
 }
 
+.filter-settings-option label {
+    cursor: pointer;
+}
+
 .filter-settings-option:not(input[type="text"]):hover {
     box-shadow: 0 0 0 1.5px #757575;
 }
@@ -264,7 +256,7 @@
     font-size: 14px;
     height: 25px;
     width: 100%;
-    border: solid 1.5pt #767676;
+    border: solid 1.4pt #767676;
     border-radius: 10px;
     outline: none;
 }
@@ -285,16 +277,21 @@
 }
 
 .filter-input-hint {
+    display: none;
     align-self: flex-start;
     margin-top: 20px;
     position: absolute;
     background-color: white;
-    display: flex;
     flex-wrap: wrap;
+    width: 300px;
     top: 100%;
     overflow: auto;
     border-radius: 10px;
     box-shadow: 0 0 3pt 2pt cornflowerblue;
+}
+
+.filter-input-hint-active {
+    display: flex;
 }
 
 .filter-input-hint-head {
@@ -329,20 +326,79 @@
 }
 
 .filter-input-hint-inner span {
+    cursor: pointer;
     color: black;
     padding-left: 15px;
     padding-right: 15px;
 }
 
+.filter-clear {
+    background-color: #757575;
+}
+
+.filter-clear .filter-expander {
+    background-color: #757575;
+}
+
+.filter-clear .filter-settings-shadow-active {
+    box-shadow: 0 0 3pt 3pt #C3C3C3;
+}
+
+.filter-clear .filter-expander-active {
+    box-shadow: 0 0 3pt 3pt #C3C3C3;
+}
+
+.filter-clear-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    outline: solid 2px #C3C3C3;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.filter-clear-btn:hover {
+    background-color: #CB4646;
+}
+
+.filter-clear-text {
+    text-align: center;
+    color: black;
+    font-size: 15px;
+}
+
+.filter-clear-btn-icon {
+    width: 20px;
+    filter: invert(0.5);
+}
+
+.filter-clear-btn:hover .filter-clear-btn-icon {
+    filter: invert(1);
+}
+
+.filter-clear-btn span {
+    color: #7f7f7f;
+    font-size: 15px;
+}
+
+.filter-clear-btn:hover span {
+    color: white;
+}
+
 .filter-apply {
+    cursor: pointer;
     margin-top: 3px;
     width: 30%;
     height: 30px;
     background-color: white;
     border-radius: 10px;
-    border: solid 1.5pt #C3C3C3;
-    background-image: url(/static/resources/check.svg);
-    background-size: 80% 80%;
+    border: solid 1.4pt #757575;
+    background-image: url(/static/resources/check-blue.svg);
+    background-size: 29px 29px;
     background-position: center center;
     background-repeat: no-repeat;
     border-top-left-radius: unset;
