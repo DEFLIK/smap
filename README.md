@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./static/resources/logo.svg" width="30%">
+  <img src="./static/resources/logo.svg" width="50%">
 </p>
 
 # ❔ About
