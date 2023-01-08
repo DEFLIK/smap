@@ -6,7 +6,7 @@
 StoryMap is a web service that visualizes the information of laureates of USSR times from 1941 to 1991, made in connection with Ural Federal University (Faculty of History and IRIT-RTF) as a project workshop of the 2nd year, 1st term
 
 # 👀 Preview
-🔗You can see the current result here: https://storymap-urfu.herokuapp.com/
+🔗You can see the current result here: https://storymap-sepia.vercel.app/
 
 # 👥 Team
 | Name | Role | Github |
